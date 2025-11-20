@@ -1,0 +1,19 @@
+{
+  "name": "codegen",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/codegen/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/codegen",
+        "main": "libs/codegen/src/index.ts",
+        "tsConfig": "libs/codegen/tsconfig.lib.json",
+        "assets": ["libs/codegen/*.md"]
+      }
+    }
+  }
+}

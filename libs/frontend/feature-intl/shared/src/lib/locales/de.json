@@ -1,0 +1,72 @@
+{
+  "dashboard": {
+    "title": "Aufgaben",
+    "welcome": "Willkommen,",
+    "stats": {
+      "active": "aktiv",
+      "completed": "erledigt"
+    },
+    "footer": {
+      "serverRendered": "Server-seitig gerendert mit Next.js",
+      "createdWith": "Erstellt mit ❤️"
+    },
+    "addTodo": {
+      "placeholder": "Was muss erledigt werden?",
+      "descriptionPlaceholder": "Beschreibung (optional)",
+      "button": "Aufgabe hinzufügen"
+    },
+    "navbar": {
+      "title": "Todo App",
+      "signOut": "Abmelden"
+    }
+  },
+  "login": {
+    "signIn": "Bei Ihrem Konto anmelden",
+    "signUp": "Konto erstellen",
+    "appName": "Einfache Todo App",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "signInButton": "Anmelden",
+    "signUpButton": "Registrieren",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto? Anmelden",
+    "dontHaveAccount": "Haben Sie kein Konto? Registrieren",
+    "checkEmail": "Überprüfen Sie Ihre E-Mails für den Bestätigungslink!",
+    "otpSignIn": "Mit OTP-Code anmelden",
+    "sendOtp": "OTP-Code senden",
+    "verifyOtp": "OTP überprüfen",
+    "usePassword": "Stattdessen Passwort verwenden",
+    "useOtp": "Stattdessen OTP verwenden",
+    "otpSent": "OTP-Code gesendet! Überprüfen Sie Ihre E-Mails",
+    "enterEmail": "Geben Sie Ihre E-Mail ein, um einen OTP-Code zu erhalten",
+    "enterOtp": "Geben Sie den 6-stelligen Code aus Ihrer E-Mail ein",
+    "otpCode": "OTP-Code",
+    "resendOtp": "OTP erneut senden",
+    "invalidOtp": "Ungültiger OTP-Code",
+    "otpExpired": "OTP-Code ist abgelaufen"
+  },
+  "profile": {
+    "title": "Profil",
+    "account": "Konto",
+    "email": "E-Mail",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "notifications": "Benachrichtigungen",
+    "privacy": "Datenschutz",
+    "about": "Über",
+    "help": "Hilfe & Support",
+    "terms": "Nutzungsbedingungen",
+    "signOut": "Abmelden",
+    "signOutConfirm": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "signOutError": "Abmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+  "common": {
+    "loading": "Laden...",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "error": "Fehler"
+  },
+  "tabs": {
+    "home": "Startseite",
+    "profile": "Profil"
+  }
+}

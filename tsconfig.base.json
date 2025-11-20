@@ -1,0 +1,71 @@
+{
+  "compilerOptions": {
+    "noPropertyAccessFromIndexSignature": false,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "lib": ["es2022", "dom"],
+    "module": "esnext",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2022",
+    "customConditions": ["development"],
+    "paths": {
+      "@backend/feature-supabase/*": ["libs/backend/feature-supabase/src/*"],
+      "@frontend/codegen/*": ["libs/codegen/src/lib/*"],
+      "@frontend/feature-intl/mobile/*": [
+        "libs/frontend/feature-intl/mobile/src/lib/*"
+      ],
+      "@frontend/feature-intl/shared/*": [
+        "libs/frontend/feature-intl/shared/src/lib/*"
+      ],
+      "@frontend/feature-intl/web/*": [
+        "libs/frontend/feature-intl/web/src/lib/*"
+      ],
+      "@frontend/feature-login/mobile/*": [
+        "libs/frontend/feature-login/mobile/src/lib/*"
+      ],
+      "@frontend/feature-login/shared/*": [
+        "libs/frontend/feature-login/shared/src/lib/*"
+      ],
+      "@frontend/feature-login/web/*": [
+        "libs/frontend/feature-login/web/src/lib/*"
+      ],
+      "@frontend/feature-themeing/mobile/*": [
+        "libs/frontend/feature-themeing/mobile/src/lib/*"
+      ],
+      "@frontend/feature-themeing/shared/*": [
+        "libs/frontend/feature-themeing/shared/src/lib/*"
+      ],
+      "@frontend/feature-themeing/web/*": [
+        "libs/frontend/feature-themeing/web/src/lib/*"
+      ],
+      "@frontend/feature-todo/mobile/*": [
+        "libs/frontend/feature-todo/mobile/src/lib/*"
+      ],
+      "@frontend/feature-todo/shared/*": [
+        "libs/frontend/feature-todo/shared/src/lib/*"
+      ],
+      "@frontend/feature-profile/mobile/*": [
+        "libs/frontend/feature-profile/mobile/src/lib/*"
+      ],
+      "@frontend/shared/hooks/*": ["libs/frontend/shared/hooks/src/lib/*"],
+      "@frontend/shared/mobile-ui/*": [
+        "libs/frontend/shared/mobile-ui/src/lib/*"
+      ],
+      "@frontend/shared/ui/*": ["libs/frontend/shared/ui/src/lib/*"],
+      "@frontend/shell/mobile/*": ["libs/frontend/shell/mobile/src/lib/*"],
+      "@shared/configs/*": ["libs/shared/configs/src/*"],
+      "@shared/utils/*": ["libs/shared/utils/src/lib/*"],
+    }
+  }
+}

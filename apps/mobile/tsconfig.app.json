@@ -1,0 +1,50 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": ["node"]
+  },
+  "files": ["../../../node_modules/@nx/expo/typings/svg.d.ts"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.test.tsx",
+    "**/*.spec.tsx",
+    "**/*.test.js",
+    "**/*.spec.js",
+    "**/*.test.jsx",
+    "**/*.spec.jsx",
+    "src/test-setup.ts"
+  ],
+  "include": [
+    "../../libs/**/*.ts",
+    "../../libs/**/*.tsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "references": [
+    {
+      "path": "../../libs/frontend/feature-intl/shared"
+    },
+    {
+      "path": "../../libs/frontend/feature-login/mobile"
+    },
+    {
+      "path": "../../libs/frontend/feature-themeing/shared"
+    },
+    {
+      "path": "../../libs/frontend/feature-themeing/mobile"
+    },
+    {
+      "path": "../../libs/frontend/feature-intl/mobile"
+    },
+    {
+      "path": "../../libs/backend/feature-supabase"
+    },
+    {
+      "path": "../../libs/frontend/shared/mobile-ui"
+    }
+  ]
+}

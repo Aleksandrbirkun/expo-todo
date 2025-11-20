@@ -1,0 +1,300 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  todosCreateMutation,
+  todosFindAllOptions,
+} from '@frontend/codegen/generated/@tanstack/react-query.gen';
+import '@frontend/codegen/clients/mobileClient'; // Initialize the client
+
+export function AddTodoPage() {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  // Create mutation using the generated mutation options
+  const createMutation = useMutation({
+    ...todosCreateMutation(),
+    onMutate: async ({ body }) => {
+      // Cancel any outgoing refetches
+      await queryClient.cancelQueries({
+        queryKey: todosFindAllOptions().queryKey,
+      });
+
+      // Snapshot the previous value
+      const previousTodos = queryClient.getQueryData(todosFindAllOptions().queryKey);
+
+      // Optimistically add the new todo
+      queryClient.setQueryData(todosFindAllOptions().queryKey, (old: any) => {
+        if (!old) return old;
+        const newTodo = {
+          ...body,
+          id: `temp-${Date.now()}`, // Temporary ID
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        return [...old, newTodo];
+      });
+
+      // Return a context object with the snapshotted value
+      return { previousTodos };
+    },
+    onSuccess: (data) => {
+      // Update with the real data from server
+      queryClient.setQueryData(todosFindAllOptions().queryKey, (old: any) => {
+        if (!old) return old;
+        // Replace temporary todo with real one
+        return old.map((todo: any) =>
+          todo.id?.startsWith('temp-') ? data : todo
+        );
+      });
+      router.back();
+    },
+    onError: (error, variables, context) => {
+      // Rollback on error
+      if (context?.previousTodos) {
+        queryClient.setQueryData(
+          todosFindAllOptions().queryKey,
+          context.previousTodos
+        );
+      }
+      console.error('Error adding todo:', error);
+      Alert.alert(
+        t('common.error', { defaultValue: 'Error' }),
+        t('addTodo.errorMessage', {
+          defaultValue: 'Failed to add todo. Please try again.',
+        })
+      );
+    },
+  });
+
+  const handleSubmit = () => {
+    if (!title.trim()) {
+      Alert.alert(
+        t('common.error', { defaultValue: 'Error' }),
+        t('addTodo.titleRequired', { defaultValue: 'Title is required' })
+      );
+      return;
+    }
+
+    createMutation.mutate({
+      body: {
+        title: title.trim(),
+        description: description.trim() || undefined,
+        completed: false,
+      },
+    });
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardView}
+      >
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={styles.backButton}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="arrow-back" size={24} color="#111827" />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>
+              {t('addTodo.title', { defaultValue: 'Add Todo' })}
+            </Text>
+            <View style={styles.headerSpacer} />
+          </View>
+
+          {/* Form */}
+          <View style={styles.form}>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>
+                {t('addTodo.titleLabel', { defaultValue: 'Title' })} *
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={title}
+                onChangeText={setTitle}
+                placeholder={t('addTodo.titlePlaceholder', {
+                  defaultValue: 'Enter todo title',
+                })}
+                placeholderTextColor="#9ca3af"
+                autoFocus
+                maxLength={100}
+              />
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>
+                {t('addTodo.descriptionLabel', { defaultValue: 'Description' })}
+              </Text>
+              <TextInput
+                style={[styles.input, styles.textArea]}
+                value={description}
+                onChangeText={setDescription}
+                placeholder={t('addTodo.descriptionPlaceholder', {
+                  defaultValue: 'Enter description (optional)',
+                })}
+                placeholderTextColor="#9ca3af"
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+                maxLength={500}
+              />
+            </View>
+          </View>
+
+          {/* Action Buttons */}
+          <View style={styles.actions}>
+            <TouchableOpacity
+              style={[styles.button, styles.cancelButton]}
+              onPress={() => router.back()}
+              activeOpacity={0.7}
+              disabled={createMutation.isPending}
+            >
+              <Text style={styles.cancelButtonText}>
+                {t('common.cancel', { defaultValue: 'Cancel' })}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.button,
+                styles.submitButton,
+                createMutation.isPending && styles.disabledButton,
+              ]}
+              onPress={handleSubmit}
+              activeOpacity={0.7}
+              disabled={createMutation.isPending}
+            >
+              {createMutation.isPending ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                <>
+                  <Ionicons name="add" size={20} color="#ffffff" />
+                  <Text style={styles.submitButtonText}>
+                    {t('addTodo.submit', { defaultValue: 'Add Todo' })}
+                  </Text>
+                </>
+              )}
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f9fafb',
+  },
+  keyboardView: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
+  },
+  backButton: {
+    padding: 8,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#111827',
+  },
+  headerSpacer: {
+    width: 40,
+  },
+  form: {
+    padding: 20,
+  },
+  inputGroup: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: 8,
+  },
+  input: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 16,
+    color: '#111827',
+  },
+  textArea: {
+    minHeight: 100,
+    paddingTop: 10,
+  },
+  actions: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    gap: 12,
+  },
+  button: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 8,
+  },
+  cancelButton: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+  },
+  cancelButtonText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#6b7280',
+  },
+  submitButton: {
+    backgroundColor: '#3b82f6',
+    flexDirection: 'row',
+    gap: 6,
+  },
+  submitButtonText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#ffffff',
+  },
+  disabledButton: {
+    opacity: 0.7,
+  },
+});

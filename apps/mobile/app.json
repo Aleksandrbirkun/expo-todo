@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Mobile",
+    "slug": "mobile",
+    "version": "1.0.0",
+    "newArchEnabled": true,
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "plugins": ["expo-localization"],
+    "assetBundlePatterns": ["**/*"],
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    }
+  }
+}

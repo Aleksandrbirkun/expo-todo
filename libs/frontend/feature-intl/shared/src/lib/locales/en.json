@@ -1,0 +1,72 @@
+{
+  "dashboard": {
+    "title": "Todos",
+    "welcome": "Welcome,",
+    "stats": {
+      "active": "active",
+      "completed": "completed"
+    },
+    "footer": {
+      "serverRendered": "Server-side rendered with Next.js",
+      "createdWith": "Created with ❤️"
+    },
+    "addTodo": {
+      "placeholder": "What needs to be done?",
+      "descriptionPlaceholder": "Description (optional)",
+      "button": "Add Todo"
+    },
+    "navbar": {
+      "title": "Todo App",
+      "signOut": "Sign Out"
+    }
+  },
+  "login": {
+    "signIn": "Sign in to your account",
+    "signUp": "Create your account",
+    "appName": "Simple Todo App",
+    "email": "Email address",
+    "password": "Password",
+    "signInButton": "Sign in",
+    "signUpButton": "Sign up",
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "dontHaveAccount": "Don't have an account? Sign up",
+    "checkEmail": "Check your email for the confirmation link!",
+    "otpSignIn": "Sign in with OTP code",
+    "sendOtp": "Send OTP code",
+    "verifyOtp": "Verify OTP",
+    "usePassword": "Use password instead",
+    "useOtp": "Use OTP instead",
+    "otpSent": "OTP code sent! Check your email",
+    "enterEmail": "Enter your email to receive an OTP code",
+    "enterOtp": "Enter the 6-digit code sent to your email",
+    "otpCode": "OTP Code",
+    "resendOtp": "Resend OTP",
+    "invalidOtp": "Invalid OTP code",
+    "otpExpired": "OTP code has expired"
+  },
+  "profile": {
+    "title": "Profile",
+    "account": "Account",
+    "email": "Email",
+    "settings": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "about": "About",
+    "help": "Help & Support",
+    "terms": "Terms of Service",
+    "signOut": "Sign Out",
+    "signOutConfirm": "Are you sure you want to sign out?",
+    "signOutError": "Failed to sign out. Please try again."
+  },
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "error": "Error"
+  },
+  "tabs": {
+    "home": "Home",
+    "profile": "Profile"
+  }
+}
