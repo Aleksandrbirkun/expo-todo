@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -39,7 +39,9 @@ export function AddTodoPage() {
       });
 
       // Snapshot the previous value
-      const previousTodos = queryClient.getQueryData(todosFindAllOptions().queryKey);
+      const previousTodos = queryClient.getQueryData(
+        todosFindAllOptions().queryKey
+      );
 
       // Optimistically add the new todo
       queryClient.setQueryData(todosFindAllOptions().queryKey, (old: any) => {
