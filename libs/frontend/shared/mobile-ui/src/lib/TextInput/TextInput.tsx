@@ -47,7 +47,7 @@ const TextInput = React.forwardRef<
       : variant;
 
     return (
-      <View className={cn('self-center', containerClassName)}>
+      <View className={cn('w-full', containerClassName)}>
         {label && (
           <Text
             className={cn(

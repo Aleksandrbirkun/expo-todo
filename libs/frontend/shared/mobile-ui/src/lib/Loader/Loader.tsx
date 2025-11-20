@@ -45,7 +45,7 @@ export function Loader({
   return (
     <View
       className={cn(
-        "flex items-center justify-start self-start",
+        "flex items-center justify-center",
         containerClassName
       )}
     >

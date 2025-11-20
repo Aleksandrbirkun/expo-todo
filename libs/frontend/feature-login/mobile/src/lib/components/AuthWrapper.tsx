@@ -111,15 +111,9 @@ export function AuthWrapper({
             {/* Header */}
             {(title || subtitle) && (
               <View style={styles.headerContainer}>
-                {title && (
-                  <Text style={styles.headerTitle}>
-                    {title}
-                  </Text>
-                )}
+                {title && <Text style={styles.headerTitle}>{title}</Text>}
                 {subtitle && (
-                  <Text style={styles.headerSubtitle}>
-                    {subtitle}
-                  </Text>
+                  <Text style={styles.headerSubtitle}>{subtitle}</Text>
                 )}
               </View>
             )}
@@ -167,6 +161,7 @@ const styles = StyleSheet.create({
   },
   redirectingContent: {
     alignItems: 'center',
+    justifyContent: 'center',
   },
   redirectingTitle: {
     fontSize: 18,
@@ -194,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#111827',
     textAlign: 'center',

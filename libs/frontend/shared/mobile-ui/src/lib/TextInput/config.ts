@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const textInputVariants = tv({
-  base: 'flex rounded-[10px] border placeholder:text-black-300 shadow bg-background',
+  base: 'flex w-full rounded-[10px] border placeholder:text-black-300 shadow bg-background',
   variants: {
     variant: {
       default: 'border-input native:focus:border-primary text-black-900',
